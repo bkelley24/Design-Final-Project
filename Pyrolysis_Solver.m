@@ -16,32 +16,32 @@ P = Y(12);
 
 %%Internal Variables
 Tr = 773.15; %K
-u_pyrolysis = 200; %w/m^2K
-
+u_pyrolysis = 500; %w/m^2K
+L = 10; %m
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
-H1f = 76.034; %kJ/mol
-H1r = -76.034; %kJ/mol
-H2f = 102.950; %kJ/mol
-H2r = -102.95; %kJ/mol
-H3 = 186.702; %kJ/mol
-H4f = 142.297; %kJ/mol
-H4r = -142.297; %kJ/mol
-H5f = -178.459; %kJ/mol
-H5r = 178.459; %kJ/mol
-H6f = 102.671; %kJ/mol
-H6r = -102.671; %kJ/mol
+H1f = 75.418; %kJ/mol
+H1r = -75.418; %kJ/mol
+H2f = 107.44; %kJ/mol
+H2r = -107.44; %kJ/mol
+H3 = 182.3; %kJ/mol
+H4f = 91.698; %kJ/mol
+H4r = -91.698; %kJ/mol
+H5f = -183.371; %kJ/mol
+H5r = 183.371; %kJ/mol
+H6f = 13.19; %kJ/mol
+H6r = -13.19; %kJ/mol
 
-cP_C2H4Cl2 = 0.1288; %kJ/molK
-cP_C2H3Cl = 0.0923; %kJ/molK
-cP_HCl = 0.0319; %kJ/molK
-cP_C2H2 = 0.0676; %kJ/molK
-cP_C2H4 = 0.0964; %kJ/molK
-cP_H2 = 0.0305; %kJ/molK
-cP_C4H6 = 0.1500; %kJ/molK
-cP_C2H2Cl2 = .06506; %kJ/molK
-cP_Cl2 = 0.00376; %kJ/molK
-cP_C2H3Cl3 = 0.1400; %kJ/molK
+cP_C2H4Cl2 = 0.1288*1000; %kJ/molK
+cP_C2H3Cl = 0.0923*1000; %kJ/molK
+cP_HCl = 0.0319*1000; %kJ/molK
+cP_C2H2 = 0.0676*1000; %kJ/molK
+cP_C2H4 = 0.0964*1000; %kJ/molK
+cP_H2 = 0.0305*1000; %kJ/molK
+cP_C4H6 = 0.1500*1000; %kJ/molK
+cP_C2H2Cl2 = .06506*1000; %kJ/molK
+cP_Cl2 = 0.00376*1000; %kJ/molK
+cP_C2H3Cl3 = 0.1400*1000; %kJ/molK
 
 %% Rxn Vars
 % Arrhenius values from Lakshamann
@@ -98,12 +98,12 @@ dCl2 = r3;
 dC2H3Cl3 = -r6f + r6r;
 
 %Inner thermal balance
-a_HT = 10; % will change
+a_HT = 200; % will change
 sumrH = (r1f*H1f + r1r*H1r + r2f*H2f + r2r*H2r + r3*H3 + r4f*H4f + r4r*H4r + r5f*H5f + r5r*H5r + r6f*H6f + r6r*H6r); 
 sumFcp = (C2H4Cl2*cP_C2H4Cl2 + C2H3Cl*cP_C2H3Cl + HCl*cP_HCl + C2H2*cP_C2H2 + C2H4*cP_C2H4 + H2*cP_H2 + C4H6*cP_C4H6 + C2H2Cl2*cP_C2H2Cl2 + Cl2*cP_Cl2 + C2H3Cl3*cP_C2H3Cl3);
 dT = (sumrH - (u_pyrolysis*a_HT*(Tr-T)))/sumFcp;
 %% Final ODE Matrix
-dP = 10;
+dP = 20/L;
 Pyrolysis_ode = [dC2H4Cl2; dC2H3Cl; dHCl; dC2H2;
     dC2H4; dH2; dC4H6; dC2H2Cl2; dCl2; dC2H3Cl3; dT; dP];
 

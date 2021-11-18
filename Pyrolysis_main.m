@@ -21,7 +21,7 @@ T_in = 550 +273.15; %K
 P_in = 2010; %kPa
 IC = [C2H4Cl2_in C2H3Cl_in HCl_in C2H2_in C2H4_in H2_in C4H6_in C2H2Cl2_in Cl2_in C2H3Cl3_in T_in P_in];
 
-volume_domain = linspace(0,10);
+volume_domain = linspace(0,5);
 
 [Xsol, Ysol] = ode15s('Pyrolysis_Solver', volume_domain, IC);
 %% Data Handling
@@ -38,6 +38,10 @@ Cl2_sol = Ysol(:,9); %kgmol/hr
 C2H3Cl3_sol = Ysol(:,10); %kgmol/hr
 T_sol = Ysol(:,11); % K
 P_sol = Ysol(:,12); % kPa
+
+conv = 0;
+i = 1;
+conv_C2H4Cl2 = (C2H4Cl2_in - C2H4Cl2_sol)/(C2H4Cl2_sol);
 
 %% Plotting
 
