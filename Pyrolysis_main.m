@@ -74,4 +74,18 @@ xlim([0 10]);
 title('Species Flow Rate vs Reactor Volume');
 legend('C2H4Cl2','C2H3Cl','HCl','C2H2','C2H4','H2','C4H6','C2H2Cl2', 'Cl2', 'C2H3Cl3');
 
+figure(2);
+plot(Xsol, P_sol, 'Color', 'red');
+hold on
+xlabel('Reactor Volume (m^3)');
+ylabel('Pressure (kPa)');
+title('Pressure vs Reactor Volume');
+
+figure(3);
+plot(Xsol, T_sol, 'Color', 'red');
+hold on
+xlabel('Reactor Volume (m^3)');
+ylabel('Temperature (K)');
+xlim([0 10])
+title('Temperature of Process Stream vs Reactor Volume')
 

@@ -16,8 +16,9 @@ P = Y(12);
 
 %%Internal Variables
 Tr = 773.15; %K
-u_pyrolysis = 1000; %w/m^2K
-L = 10; %m
+u_pyrolysis = 500; %w/m^2K
+L = 5; %m
+V_reactor = 10;
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
 H1f = 75.418; %kJ/mol
@@ -59,31 +60,31 @@ k6r = 0.3*10^(9)*exp(-44000/(1.987*T)); %m^3/kmol-s
 
 % Concentrations
 total_flow = C2H4Cl2 + C2H3Cl + HCl + C2H2 + C2H4 + H2 + C4H6 + C2H2Cl2 + Cl2 + C2H3Cl3; 
-
-c_C2H4Cl2 = C2H4Cl2/total_flow; %kgmol/hr
-c_C2H3Cl = C2H3Cl/total_flow; %kgmol/hr
-c_HCl = HCl/total_flow;
-c_C2H2 = C2H2/total_flow;
-c_C2H4 = C2H4/total_flow;
-c_H2 = H2/total_flow;
-c_C4H6 = C4H6/total_flow;
-c_C2H2Cl2 = C2H2Cl2/total_flow;
+Rgas = 8.314; %m^3kPa/kmol-k
+c_C2H4Cl2 = C2H4Cl2/total_flow*P/Rgas/T; %kgmol/hr
+c_C2H3Cl = C2H3Cl/total_flow*P/Rgas/T; %kgmol/hr
+c_HCl = HCl/total_flow*P/Rgas/T;
+c_C2H2 = C2H2/total_flow*P/Rgas/T;
+c_C2H4 = C2H4/total_flow*P/Rgas/T;
+c_H2 = H2/total_flow*P/Rgas/T;
+c_C4H6 = C4H6/total_flow*P/Rgas/T;
+c_C2H2Cl2 = C2H2Cl2/total_flow*P/Rgas/T;
 %c_Cl2 = Cl2; Don't need?
-c_C2H3Cl3 = C2H3Cl3/total_flow;
+c_C2H3Cl3 = C2H3Cl3/total_flow*P/Rgas/T;
 
 %Rate equations
 
-r1f = k1f * c_C2H4Cl2;
-r1r = k1r * c_C2H3Cl * c_HCl;
-r2f = k2f * c_C2H3Cl;
-r2r = k2r * c_C2H2 * c_HCl;
-r3 = k3 * c_C2H4Cl2;
-r4f = k4f * c_C2H4;
-r4r = k4r * c_C2H2 * c_H2;
-r5f = k5f * c_C2H2 * c_C2H4;
-r5r = k5r * c_C4H6;
-r6f = k6f * c_C2H3Cl3;
-r6r = k6r * c_C2H2Cl2 * c_HCl;
+r1f = k1f * c_C2H4Cl2*3600;
+r1r = k1r * c_C2H3Cl * c_HCl*3600;
+r2f = k2f * c_C2H3Cl*3600;
+r2r = k2r * c_C2H2 * c_HCl*3600;
+r3 = k3 * c_C2H4Cl2*3600;
+r4f = k4f * c_C2H4*3600;
+r4r = k4r * c_C2H2 * c_H2*3600;
+r5f = k5f * c_C2H2 * c_C2H4*3600;
+r5r = k5r * c_C4H6*3600;
+r6f = k6f * c_C2H3Cl3*3600;
+r6r = k6r * c_C2H2Cl2 * c_HCl*3600;
 
 %Differentials for Solver
 dC2H4Cl2 = -r1f + r1r -r3;
@@ -100,12 +101,12 @@ dC2H3Cl3 = -r6f + r6r;
 %4/d in fogler
 
 %Inner thermal balance
-a_HT = 100; % will change
+a_HT = 4/L; % will change
 sumrH = (r1f*H1f + r1r*H1r + r2f*H2f + r2r*H2r + r3*H3 + r4f*H4f + r4r*H4r + r5f*H5f + r5r*H5r + r6f*H6f + r6r*H6r); 
 sumFcp = (C2H4Cl2*cP_C2H4Cl2 + C2H3Cl*cP_C2H3Cl + HCl*cP_HCl + C2H2*cP_C2H2 + C2H4*cP_C2H4 + H2*cP_H2 + C4H6*cP_C4H6 + C2H2Cl2*cP_C2H2Cl2 + Cl2*cP_Cl2 + C2H3Cl3*cP_C2H3Cl3);
-dT = (sumrH - (u_pyrolysis*a_HT*(Tr-T)))/sumFcp;
+dT = -(sumrH - (u_pyrolysis*a_HT*(Tr-T)))/sumFcp;
 %% Final ODE Matrix
-dP = 20/L;
+dP = -20/L;
 Pyrolysis_ode = [dC2H4Cl2; dC2H3Cl; dHCl; dC2H2;
     dC2H4; dH2; dC4H6; dC2H2Cl2; dCl2; dC2H3Cl3; dT; dP];
 
