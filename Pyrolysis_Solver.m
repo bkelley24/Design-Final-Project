@@ -18,7 +18,6 @@ P = Y(12);
 Tr = 773.15; %K
 u_pyrolysis = 500; %w/m^2K
 L = 5; %m
-V_reactor = 10;
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
 H1f = 75.418; %kJ/mol

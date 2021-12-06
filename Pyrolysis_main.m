@@ -40,10 +40,19 @@ C2H3Cl3_sol = Ysol(:,10); %kgmol/hr
 T_sol = Ysol(:,11); % K
 P_sol = Ysol(:,12); % kPa
 
-conv = 0;
+conv_C2H4Cl2 = 0;
 i = 1;
-conv_C2H4Cl2 = (C2H4Cl2_in - C2H4Cl2_sol)/(C2H4Cl2_sol);
-    
+while conv_C2H4Cl2 < 0.58
+    conv_C2H4Cl2 = (C2H4Cl2_in - C2H4Cl2_sol(i))/(C2H4Cl2_in);
+    i = i+ 1;
+    if i >= length(C2H4Cl2_sol)
+        break;
+    end
+    volume_for_conv = Xsol(i);
+end
+
+
+
 %% Plotting
 
 figure(5);
