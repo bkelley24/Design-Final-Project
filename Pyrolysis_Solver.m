@@ -16,7 +16,7 @@ P = Y(12);
 
 %%Internal Variables
 Tr = 773.15; %K
-u_pyrolysis = 500; %w/m^2K
+u_pyrolysis = 300; %w/m^2K
 L = 5; %m
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
