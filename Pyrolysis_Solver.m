@@ -16,8 +16,8 @@ P = Y(12);
 
 %%Internal Variables
 Tr = 773.15; %K
-u_pyrolysis = 300; %w/m^2K
-L = 5; %m
+u_pyrolysis = 500; %w/m^2K
+D = .5; %m
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
 H1f = 75.418; %kJ/mol
@@ -100,14 +100,14 @@ dC2H3Cl3 = -r6f + r6r;
 %4/d in fogler
 
 %Inner thermal balance
-a_HT = 4/L; % will change
+a_HT = 4/D; % will change
 sumrH = (r1f*H1f + r1r*H1r + r2f*H2f + r2r*H2r + r3*H3 + r4f*H4f + r4r*H4r + r5f*H5f + r5r*H5r + r6f*H6f + r6r*H6r); 
 sumFcp = (C2H4Cl2*cP_C2H4Cl2 + C2H3Cl*cP_C2H3Cl + HCl*cP_HCl + C2H2*cP_C2H2 + C2H4*cP_C2H4 + H2*cP_H2 + C4H6*cP_C4H6 + C2H2Cl2*cP_C2H2Cl2 + Cl2*cP_Cl2 + C2H3Cl3*cP_C2H3Cl3);
 dT = -(sumrH - (u_pyrolysis*a_HT*(Tr-T)))/sumFcp;
 %% Final ODE Matrix
+L=10;
 dP = -20/L;
 Pyrolysis_ode = [dC2H4Cl2; dC2H3Cl; dHCl; dC2H2;
     dC2H4; dH2; dC4H6; dC2H2Cl2; dCl2; dC2H3Cl3; dT; dP];
 
 end
-
