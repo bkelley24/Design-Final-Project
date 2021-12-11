@@ -17,31 +17,31 @@ P = Y(12);
 %%Internal Variables
 Tr = 773.15; %K
 u_pyrolysis = 500; %w/m^2K
-D = .5; %m
+D = 1; %m
 %% Energy Vars
 %delta T over reactor is not large enough to make these non constant
-H1f = 75.418; %kJ/mol
-H1r = -75.418; %kJ/mol
-H2f = 107.44; %kJ/mol
-H2r = -107.44; %kJ/mol
-H3 = 182.3; %kJ/mol
-H4f = 91.698; %kJ/mol
-H4r = -91.698; %kJ/mol
-H5f = -183.371; %kJ/mol
-H5r = 183.371; %kJ/mol
-H6f = 13.19; %kJ/mol
-H6r = -13.19; %kJ/mol
+H1f = 74.601; %kJ/mol
+H1r = -H1f; %kJ/mol
+H2f = 107.044; %kJ/mol
+H2r = -H2f; %kJ/mol
+H3 = 189.946; %kJ/mol
+H4f = 179.592; %kJ/mol
+H4r = -H4f; %kJ/mol
+H5f = -185.566; %kJ/mol
+H5r = -H5f; %kJ/mol
+H6f = -74.083; %kJ/mol
+H6r = -H6f; %kJ/mol
 
-cP_C2H4Cl2 = 0.1288*1000; %kJ/molK
-cP_C2H3Cl = 0.0923*1000; %kJ/molK
-cP_HCl = 0.0319*1000; %kJ/molK
-cP_C2H2 = 0.0676*1000; %kJ/molK
-cP_C2H4 = 0.0964*1000; %kJ/molK
-cP_H2 = 0.0305*1000; %kJ/molK
-cP_C4H6 = 0.1500*1000; %kJ/molK
-cP_C2H2Cl2 = .06506*1000; %kJ/molK
+cP_C2H4Cl2 = 0.1378*1000; %kJ/molK
+cP_C2H3Cl = 0.0990*1000; %kJ/molK
+cP_HCl = 0.0328*1000; %kJ/molK
+cP_C2H2 = 0.0697*1000; %kJ/molK
+cP_C2H4 = 0.1018*1000; %kJ/molK
+cP_H2 = 0.0310*1000; %kJ/molK
+cP_C4H6 = 0.1551*1000; %kJ/molK
+cP_C2H2Cl2 = .0651*1000; %kJ/molK
 cP_Cl2 = 0.00376*1000; %kJ/molK
-cP_C2H3Cl3 = 0.1400*1000; %kJ/molK
+cP_C2H3Cl3 = 0.1480*1000; %kJ/molK
 
 %% Rxn Vars
 % Arrhenius values from Lakshamann
